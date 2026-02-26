@@ -517,6 +517,18 @@
   "DeviceGroupManage": {
     "One": "Device Group Manage"
   },
+  "UserDeviceManage": {
+    "One": "User Devices"
+  },
+  "DeviceManage": {
+    "One": "Device Manage"
+  },
+  "MaxDevices": {
+    "One": "Max Devices"
+  },
+  "LoginAt": {
+    "One": "Login At"
+  },
   "Drop file here or click to upload": {
     "One": "Drop file here or click to upload"
   },

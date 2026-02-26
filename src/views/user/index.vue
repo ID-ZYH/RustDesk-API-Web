@@ -36,10 +36,16 @@
         <el-table-column prop="remark" :label="T('Remark')" align="center"/>
         <el-table-column prop="created_at" :label="T('CreatedAt')" align="center"/>
         <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center"/>
-        <el-table-column :label="T('Actions')" align="center" width="650">
+        <el-table-column :label="T('MaxDevices')" align="center" width="120">
+          <template #default="{row}">
+            <el-tag>{{ row.max_devices || 1 }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column :label="T('Actions')" align="center" width="760">
           <template #default="{row}">
             <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
             <el-button @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
+            <el-button type="primary" @click="toUserDevice(row)">{{ T('DeviceManage') }}</el-button>
             <el-button @click="toEdit(row)">{{ T('Edit') }}</el-button>
             <el-button type="warning" @click="changePass(row)">{{ T('ResetPassword') }}</el-button>
             <el-button type="danger" @click="remove(row)">{{ T('Delete') }}</el-button>
@@ -83,7 +89,7 @@
   watch(() => listQuery.page, getList)
   watch(() => listQuery.page_size, handlerQuery)
 
-  const { toEdit, toAdd, toAddressBook, toTag } = useToEditOrAdd()
+  const { toEdit, toAdd, toAddressBook, toTag, toUserDevice } = useToEditOrAdd()
 
   const { changePass } = useChangePwd()
 

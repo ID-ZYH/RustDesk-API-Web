@@ -547,5 +547,17 @@
   },
   "Remark": {
     "One": "备注"
+  },
+  "UserDeviceManage": {
+    "One": "用户设备管理"
+  },
+  "DeviceManage": {
+    "One": "设备管理"
+  },
+  "MaxDevices": {
+    "One": "最大设备限制"
+  },
+  "LoginAt": {
+    "One": "登录时间"
   }
 }

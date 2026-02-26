@@ -1,0 +1,209 @@
+<template>
+  <div>
+    <el-card class="list-query" shadow="hover">
+      <el-form inline label-width="120px">
+        <el-form-item :label="T('User')">
+          <el-select v-model="listQuery.user_id" clearable @change="onUserChange">
+            <el-option
+              v-for="item in allUsers"
+              :key="item.id"
+              :label="item.username"
+              :value="item.id"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="T('MaxDevices')">
+          <el-input-number v-model="maxDevices" :min="1" :max="100" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="saveLimit">{{ T('Save') }}</el-button>
+          <el-button type="primary" @click="handlerQuery">{{ T('Filter') }}</el-button>
+          <el-button type="danger" @click="toBatchUnbind">{{ T('BatchDelete') }}</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
+    <el-card class="list-body" shadow="hover">
+      <el-table :data="listRes.list" v-loading="listRes.loading" border @selection-change="handleSelectionChange">
+        <el-table-column type="selection" align="center" width="50" />
+        <el-table-column prop="id" label="ID" align="center" width="100" />
+        <el-table-column prop="device_id" :label="T('Device')" align="center" show-overflow-tooltip />
+        <el-table-column prop="device_uuid" :label="T('Uuid')" align="center" show-overflow-tooltip />
+        <el-table-column prop="client" label="Client" align="center" width="120" />
+        <el-table-column prop="platform" :label="T('Platform')" align="center" width="140" />
+        <el-table-column prop="ip" :label="T('Ip')" align="center" width="160" />
+        <el-table-column :label="T('LoginAt')" align="center" width="180">
+          <template #default="{row}">
+            {{ row.login_at || '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="T('ExpireTime')" align="center" width="180">
+          <template #default="{row}">
+            <el-tag :type="expired(row) ? 'info' : 'success'">{{ row.expired_at ? new Date(row.expired_at * 1000).toLocaleString() : '-' }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column :label="T('Actions')" align="center" width="180">
+          <template #default="{row}">
+            <el-button type="danger" @click="toUnbind(row)">{{ T('UnBind') }}</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card class="list-page" shadow="hover">
+      <el-pagination
+        background
+        layout="prev, pager, next, sizes, jumper"
+        :page-sizes="[10, 20, 50, 100]"
+        v-model:page-size="listQuery.page_size"
+        v-model:current-page="listQuery.page"
+        :total="listRes.total"
+      />
+    </el-card>
+  </div>
+</template>
+
+<script setup>
+  import { reactive, ref, watch, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+  import { loadAllUsers } from '@/global'
+  import { list, setLimit, unbind, batchUnbind } from '@/api/user_device'
+  import { ElMessage, ElMessageBox } from 'element-plus'
+  import { T } from '@/utils/i18n'
+
+  const route = useRoute()
+  const { allUsers, getAllUsers } = loadAllUsers()
+  const maxDevices = ref(1)
+
+  const listRes = reactive({
+    list: [],
+    total: 0,
+    loading: false,
+  })
+
+  const listQuery = reactive({
+    page: 1,
+    page_size: 10,
+    user_id: route.query?.user_id ? parseInt(route.query.user_id) : null,
+  })
+
+  const getCurrentUser = () => {
+    if (!listQuery.user_id) {
+      return null
+    }
+    return allUsers.value.find(item => item.id === listQuery.user_id) || null
+  }
+
+  const syncMaxDevices = () => {
+    const user = getCurrentUser()
+    maxDevices.value = user?.max_devices > 0 ? user.max_devices : 1
+  }
+
+  const getList = async () => {
+    if (!listQuery.user_id) {
+      listRes.list = []
+      listRes.total = 0
+      return
+    }
+    listRes.loading = true
+    const res = await list(listQuery).catch(_ => false)
+    listRes.loading = false
+    if (res) {
+      listRes.list = res.data.list
+      listRes.total = res.data.total
+    }
+  }
+
+  const handlerQuery = () => {
+    if (listQuery.page === 1) {
+      getList()
+    } else {
+      listQuery.page = 1
+    }
+  }
+
+  const onUserChange = () => {
+    syncMaxDevices()
+    handlerQuery()
+  }
+
+  const saveLimit = async () => {
+    if (!listQuery.user_id) {
+      ElMessage.warning(T('PleaseSelectData'))
+      return
+    }
+    const res = await setLimit({
+      user_id: listQuery.user_id,
+      max_devices: maxDevices.value,
+    }).catch(_ => false)
+    if (res) {
+      const user = getCurrentUser()
+      if (user) {
+        user.max_devices = maxDevices.value
+      }
+      ElMessage.success(T('OperationSuccess'))
+    }
+  }
+
+  const toUnbind = async (row) => {
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: T('UnBind') }), {
+      confirmButtonText: T('Confirm'),
+      cancelButtonText: T('Cancel'),
+      type: 'warning',
+    }).catch(_ => false)
+    if (!cf) {
+      return
+    }
+    const res = await unbind({ id: row.id }).catch(_ => false)
+    if (res) {
+      ElMessage.success(T('OperationSuccess'))
+      getList()
+    }
+  }
+
+  const multipleSelection = ref([])
+  const handleSelectionChange = (val) => {
+    multipleSelection.value = val
+  }
+
+  const toBatchUnbind = async () => {
+    const ids = multipleSelection.value.map(v => v.id)
+    if (!ids.length) {
+      ElMessage.warning(T('PleaseSelectData'))
+      return
+    }
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: T('BatchDelete') }), {
+      confirmButtonText: T('Confirm'),
+      cancelButtonText: T('Cancel'),
+      type: 'warning',
+    }).catch(_ => false)
+    if (!cf) {
+      return
+    }
+    const res = await batchUnbind({ ids }).catch(_ => false)
+    if (res) {
+      ElMessage.success(T('OperationSuccess'))
+      getList()
+    }
+  }
+
+  const expired = (row) => {
+    const now = new Date().getTime()
+    return row.expired_at * 1000 < now
+  }
+
+  onMounted(async () => {
+    await getAllUsers()
+    syncMaxDevices()
+    getList()
+  })
+
+  watch(() => listQuery.page, getList)
+  watch(() => listQuery.page_size, handlerQuery)
+</script>
+
+<style scoped lang="scss">
+.list-query .el-select {
+  --el-select-width: 180px;
+}
+</style>

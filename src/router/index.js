@@ -173,6 +173,12 @@ export const asyncRoutes = [
         component: () => import('@/views/user/token.vue'),
       },
       {
+        path: '/userDevice',
+        name: 'UserDeviceManage',
+        meta: { title: 'UserDeviceManage', icon: 'Iphone' /*keepAlive: true*/ },
+        component: () => import('@/views/user/device.vue'),
+      },
+      {
         path: '/loginLog',
         name: 'LoginLog',
         meta: { title: 'LoginLog', icon: 'List' /*keepAlive: true*/ },
@@ -213,4 +219,3 @@ export const router = createRouter({
   history: createWebHashHistory(),
   routes: constantRoutes,
 })
-

@@ -32,6 +32,9 @@
                    :inactive-value="DISABLE_STATUS"
         ></el-switch>
       </el-form-item>
+      <el-form-item :label="T('MaxDevices')" prop="max_devices">
+        <el-input-number v-model="form.max_devices" :min="1" :max="100"></el-input-number>
+      </el-form-item>
       <el-form-item :label="T('Remark')" prop="remark">
           <el-input v-model="form.remark"></el-input>
       </el-form-item>
