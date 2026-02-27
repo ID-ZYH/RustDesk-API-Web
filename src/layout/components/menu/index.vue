@@ -46,7 +46,7 @@
   .menus {
     min-height: calc(100vh - 56px);
     border-right: none;
-    padding: 8px 6px 12px;
+    padding: 10px 8px 12px;
     &:not(.el-menu--collapse) {
       width: var(--sideBarWidth);
     }
@@ -55,8 +55,9 @@
       height: 40px;
       line-height: 40px;
       border-radius: 6px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       transition: all 0.2s ease;
+      font-weight: 500;
     }
     :deep(.el-menu-item:hover),
     :deep(.el-sub-menu__title:hover) {
@@ -69,6 +70,25 @@
     }
     :deep(.el-sub-menu .el-menu) {
       background: transparent;
+    }
+    :deep(.el-menu-item .el-icon),
+    :deep(.el-sub-menu__title .el-icon) {
+      font-size: 17px;
+      color: #f2f6ff;
+    }
+    :deep(.el-menu-item span),
+    :deep(.el-sub-menu__title span) {
+      color: #f2f6ff;
+      opacity: 1;
+    }
+    :deep(.el-menu--collapse .el-menu-item),
+    :deep(.el-menu--collapse .el-sub-menu__title) {
+      padding: 0 !important;
+      justify-content: center;
+    }
+    :deep(.el-menu--collapse .el-menu-item .el-icon),
+    :deep(.el-menu--collapse .el-sub-menu__title .el-icon) {
+      margin: 0 !important;
     }
   }
 

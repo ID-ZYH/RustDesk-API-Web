@@ -83,18 +83,20 @@
 .tags-wrap {
   display: flex;
   align-items: center;
-  min-height: 30px;
+  min-height: 36px;
   padding: 0;
 }
 
 .tag {
   border-radius: 6px;
   cursor: pointer;
-  margin-right: 6px;
+  margin-right: 8px;
+  padding: 0 6px;
   border: 1px solid #d8e4fb;
   background: #ffffff;
   color: #3b4c65;
   transition: all 0.2s ease;
+  font-size: 13px;
 
   &:hover {
     border-color: #8db0fb;

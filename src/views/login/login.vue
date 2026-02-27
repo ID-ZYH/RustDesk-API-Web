@@ -305,4 +305,21 @@ h1 {
     }
   }
 }
+
+:global(html.dark) .login-container {
+  background: #0f172a;
+}
+
+:global(html.dark) .login-card {
+  background: #111f36;
+  border-color: #243754;
+}
+
+:global(html.dark) .login-title {
+  color: #8cb0ff;
+}
+
+:global(html.dark) .el-form-item :deep(.el-form-item__label) {
+  color: #d9e6ff;
+}
 </style>
