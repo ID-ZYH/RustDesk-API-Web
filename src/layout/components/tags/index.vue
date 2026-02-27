@@ -72,12 +72,31 @@
 </script>
 
 <style lang="scss" scoped>
+.tag-wrap {
+}
 
 .tag {
-  border-radius: 0;
+  border-radius: 999px;
   cursor: pointer;
+  margin-right: 8px;
+  border: 1px solid #dbe5f3;
+  background: rgba(255, 255, 255, 0.92);
+  color: #334155;
+  transition: all 0.2s ease;
 
-  &.active {
+  &:hover {
+    border-color: #9db8ff;
+    color: #1e3a8a;
+  }
+
+  :deep(.el-tag__close) {
+    color: inherit;
+  }
+
+  &[effect='dark'] {
+    background: linear-gradient(90deg, #3d7eff 0%, #5b8eff 100%);
+    border-color: #3d7eff;
+    color: #fff;
   }
 }
 </style>

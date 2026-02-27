@@ -87,10 +87,10 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 12px;
 
   .menu-item {
-    margin-left: 15px;
+    margin-left: 0;
 
     * {
       outline: none;
@@ -98,14 +98,20 @@
   }
 
   .title {
-    color: #fff;
+    color: #334155;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
+    font-size: 14px;
 
 
     .nickname {
-      padding: 0 10px;
+      padding: 0 8px;
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

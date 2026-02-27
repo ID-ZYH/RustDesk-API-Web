@@ -15,6 +15,9 @@
 
 <style scoped lang="scss">
 .scroll-sidebar {
-  background-color: #2d3a4b;
+  height: calc(100vh - 20px);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #162033 0%, #1d2b45 100%);
+  box-shadow: 0 10px 26px rgba(22, 32, 51, 0.35);
 }
 </style>

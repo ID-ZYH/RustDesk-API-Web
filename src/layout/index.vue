@@ -1,10 +1,10 @@
 <template>
   <el-config-provider :locale="appStore.setting.locale.value">
-    <el-container :style="{'--sideBarWidth': sideBarWidth}">
+    <el-container class="app-shell" :style="{'--sideBarWidth': sideBarWidth}">
       <el-aside :width="leftWidth" class="app-left">
         <g-aside></g-aside>
       </el-aside>
-      <el-container class="app-container ">
+      <el-container class="app-container">
         <el-header class="app-header">
           <g-header></g-header>
         </el-header>
@@ -13,13 +13,15 @@
         </div>
 
         <el-main class="app-main">
-          <router-view v-slot="{ Component }">
-            <transition mode="out-in" name="el-fade-in-linear">
-              <keep-alive :include="cachedTags">
-                <component :is="Component"/>
-              </keep-alive>
-            </transition>
-          </router-view>
+          <div class="page-panel">
+            <router-view v-slot="{ Component }">
+              <transition mode="out-in" name="el-fade-in-linear">
+                <keep-alive :include="cachedTags">
+                  <component :is="Component"/>
+                </keep-alive>
+              </transition>
+            </router-view>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -45,27 +47,46 @@
 </script>
 
 <style lang="scss" scoped>
+.app-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 10%, #eef4ff 0%, #f7f9fc 40%, #f2f5fa 100%);
+}
+
 .app-header {
-  background-color: #3f454b;
-  color: var(--basicWhite);
+  background: transparent;
   display: flex;
-  height: 50px;
+  height: 62px;
+  padding: 8px 16px 0;
 }
 
 .header-tags {
-  height: auto;
-  border-bottom: 1px solid #eee;
+  height: 44px;
   display: flex;
-  padding: 0;
+  align-items: center;
+  padding: 0 16px;
 }
 
 .app-left {
-  transition: width 0.5s;
+  transition: width 0.24s ease;
+  padding: 10px 0 10px 10px;
 }
 
 .app-container {
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.app-main {
+  padding: 0 16px 16px;
+}
+
+.page-panel {
+  height: 100%;
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(4px);
 }
 </style>
-
 
