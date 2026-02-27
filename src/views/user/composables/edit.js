@@ -49,7 +49,17 @@ export function useSubmit (form, id) {
     username: [{ required: true, message: T('ParamRequired', { param: T('Username') }) }],
     group_id: [{ required: true, message: T('ParamRequired', { param: T('Group') }) }],
     status: [{ required: true, message: T('ParamRequired', { param: T('Status') }) }],
-    max_devices: [{ required: true, message: T('ParamRequired', { param: T('MaxDevices') }) }],
+    max_devices: [{
+      required: true,
+      validator: (_rule, value, callback) => {
+        if (value === -1 || (value >= 1 && value <= 10000)) {
+          callback()
+          return
+        }
+        callback(new Error(T('MaxDevicesInvalid')))
+      },
+      trigger: 'blur',
+    }],
   })
 
   const validate = async () => {

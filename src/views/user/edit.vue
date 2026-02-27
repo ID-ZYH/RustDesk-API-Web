@@ -33,7 +33,8 @@
         ></el-switch>
       </el-form-item>
       <el-form-item :label="T('MaxDevices')" prop="max_devices">
-        <el-input-number v-model="form.max_devices" :min="1" :max="100"></el-input-number>
+        <el-input-number v-model="form.max_devices" :min="-1" :max="10000"></el-input-number>
+        <span style="margin-left: 8px; color: #999;">{{ T('MaxDevicesTips') }}</span>
       </el-form-item>
       <el-form-item :label="T('Remark')" prop="remark">
           <el-input v-model="form.remark"></el-input>

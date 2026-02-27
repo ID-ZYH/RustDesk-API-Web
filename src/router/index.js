@@ -131,6 +131,12 @@ export const asyncRoutes = [
         component: () => import('@/views/user/index.vue'),
       },
       {
+        path: 'userDevice',
+        name: 'UserDeviceManage',
+        meta: { title: 'UserDeviceManage', icon: 'Iphone' /*keepAlive: true*/ },
+        component: () => import('@/views/user/device.vue'),
+      },
+      {
         path: 'add',
         name: 'UserAdd',
         meta: { title: 'UserAdd', hide: true },
@@ -171,12 +177,6 @@ export const asyncRoutes = [
         name: 'UserToken',
         meta: { title: 'UserToken', icon: 'Ticket' /*keepAlive: true*/ },
         component: () => import('@/views/user/token.vue'),
-      },
-      {
-        path: '/userDevice',
-        name: 'UserDeviceManage',
-        meta: { title: 'UserDeviceManage', icon: 'Iphone' /*keepAlive: true*/ },
-        component: () => import('@/views/user/device.vue'),
       },
       {
         path: '/loginLog',

@@ -79,7 +79,7 @@ export function useToEditOrAdd () {
     router.push('/user/addressBook/?user_id=' + row.id)
   }
   const toUserDevice = (row) => {
-    router.push('/user/userDevice/?user_id=' + row.id)
+    router.push('/user/userDevice?user_id=' + row.id)
   }
   return {
     toAdd,

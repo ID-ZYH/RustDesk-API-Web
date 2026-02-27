@@ -529,6 +529,30 @@
   "LoginAt": {
     "One": "Login At"
   },
+  "FirstLoginAt": {
+    "One": "First Login At"
+  },
+  "LastLoginAt": {
+    "One": "Last Login At"
+  },
+  "SearchByUsername": {
+    "One": "Search Username"
+  },
+  "Unlimited": {
+    "One": "Unlimited"
+  },
+  "Bound": {
+    "One": "Bound"
+  },
+  "Unbound": {
+    "One": "Unbound"
+  },
+  "MaxDevicesTips": {
+    "One": "-1 means unlimited, 1~10000 means limited devices."
+  },
+  "MaxDevicesInvalid": {
+    "One": "Max devices must be -1 or between 1 and 10000."
+  },
   "Drop file here or click to upload": {
     "One": "Drop file here or click to upload"
   },

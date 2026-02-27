@@ -559,5 +559,29 @@
   },
   "LoginAt": {
     "One": "登录时间"
+  },
+  "FirstLoginAt": {
+    "One": "首次登录时间"
+  },
+  "LastLoginAt": {
+    "One": "最后登录时间"
+  },
+  "SearchByUsername": {
+    "One": "搜索用户名"
+  },
+  "Unlimited": {
+    "One": "无限制"
+  },
+  "Bound": {
+    "One": "已绑定"
+  },
+  "Unbound": {
+    "One": "已解绑"
+  },
+  "MaxDevicesTips": {
+    "One": "-1 为无限制，1~10000 为限制设备数。"
+  },
+  "MaxDevicesInvalid": {
+    "One": "最大设备必须是 -1 或 1~10000。"
   }
 }

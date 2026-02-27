@@ -2,10 +2,13 @@
   <div>
     <el-card class="list-query" shadow="hover">
       <el-form inline label-width="120px">
+        <el-form-item :label="T('SearchByUsername')">
+          <el-input v-model="listQuery.username" clearable style="width: 180px" />
+        </el-form-item>
         <el-form-item :label="T('User')">
-          <el-select v-model="listQuery.user_id" clearable @change="onUserChange">
+          <el-select v-model="listQuery.user_id" clearable @change="onUserChange" style="width: 180px">
             <el-option
-              v-for="item in allUsers"
+              v-for="item in filteredUsers"
               :key="item.id"
               :label="item.username"
               :value="item.id"
@@ -13,7 +16,8 @@
           </el-select>
         </el-form-item>
         <el-form-item :label="T('MaxDevices')">
-          <el-input-number v-model="maxDevices" :min="1" :max="100" />
+          <el-input-number v-model="maxDevices" :min="-1" :max="10000" />
+          <span style="margin-left: 8px; color: #999;">{{ T('MaxDevicesTips') }}</span>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="saveLimit">{{ T('Save') }}</el-button>
@@ -26,25 +30,30 @@
     <el-card class="list-body" shadow="hover">
       <el-table :data="listRes.list" v-loading="listRes.loading" border @selection-change="handleSelectionChange">
         <el-table-column type="selection" align="center" width="50" />
-        <el-table-column prop="id" label="ID" align="center" width="100" />
+        <el-table-column prop="id" label="ID" align="center" width="90" />
+        <el-table-column prop="username" :label="T('Username')" align="center" width="140" />
         <el-table-column prop="device_id" :label="T('Device')" align="center" show-overflow-tooltip />
-        <el-table-column prop="device_uuid" :label="T('Uuid')" align="center" show-overflow-tooltip />
-        <el-table-column prop="client" label="Client" align="center" width="120" />
-        <el-table-column prop="platform" :label="T('Platform')" align="center" width="140" />
-        <el-table-column prop="ip" :label="T('Ip')" align="center" width="160" />
-        <el-table-column :label="T('LoginAt')" align="center" width="180">
+        <el-table-column prop="uuid" :label="T('Uuid')" align="center" show-overflow-tooltip />
+        <el-table-column prop="platform" :label="T('Platform')" align="center" width="120" />
+        <el-table-column prop="ip" :label="T('Ip')" align="center" width="150" />
+        <el-table-column :label="T('Status')" align="center" width="120">
           <template #default="{row}">
-            {{ row.login_at || '-' }}
+            <el-tag :type="row.status === 1 ? 'success' : 'info'">{{ row.status === 1 ? T('Bound') : T('Unbound') }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="T('ExpireTime')" align="center" width="180">
+        <el-table-column :label="T('FirstLoginAt')" align="center" width="180">
           <template #default="{row}">
-            <el-tag :type="expired(row) ? 'info' : 'success'">{{ row.expired_at ? new Date(row.expired_at * 1000).toLocaleString() : '-' }}</el-tag>
+            {{ row.first_login_at || '-' }}
+          </template>
+        </el-table-column>
+        <el-table-column :label="T('LastLoginAt')" align="center" width="180">
+          <template #default="{row}">
+            {{ row.last_login_at || '-' }}
           </template>
         </el-table-column>
         <el-table-column :label="T('Actions')" align="center" width="180">
           <template #default="{row}">
-            <el-button type="danger" @click="toUnbind(row)">{{ T('UnBind') }}</el-button>
+            <el-button type="danger" :disabled="row.status !== 1" @click="toUnbind(row)">{{ T('UnBind') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -64,7 +73,7 @@
 </template>
 
 <script setup>
-  import { reactive, ref, watch, onMounted } from 'vue'
+  import { computed, reactive, ref, watch, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import { loadAllUsers } from '@/global'
   import { list, setLimit, unbind, batchUnbind } from '@/api/user_device'
@@ -85,7 +94,28 @@
     page: 1,
     page_size: 10,
     user_id: route.query?.user_id ? parseInt(route.query.user_id) : null,
+    username: '',
   })
+
+  const filteredUsers = computed(() => {
+    if (!listQuery.username) {
+      return allUsers.value
+    }
+    return allUsers.value.filter(v => v.username?.toLowerCase().includes(listQuery.username.toLowerCase()))
+  })
+
+  const normalizeMaxDevices = (value) => {
+    if (value === -1) {
+      return -1
+    }
+    if (!value || value < 1) {
+      return 1
+    }
+    if (value > 10000) {
+      return 10000
+    }
+    return value
+  }
 
   const getCurrentUser = () => {
     if (!listQuery.user_id) {
@@ -96,17 +126,16 @@
 
   const syncMaxDevices = () => {
     const user = getCurrentUser()
-    maxDevices.value = user?.max_devices > 0 ? user.max_devices : 1
+    maxDevices.value = normalizeMaxDevices(user?.max_devices ?? 1)
   }
 
   const getList = async () => {
-    if (!listQuery.user_id) {
-      listRes.list = []
-      listRes.total = 0
-      return
-    }
     listRes.loading = true
-    const res = await list(listQuery).catch(_ => false)
+    const params = {
+      ...listQuery,
+      username: listQuery.username || undefined,
+    }
+    const res = await list(params).catch(_ => false)
     listRes.loading = false
     if (res) {
       listRes.list = res.data.list
@@ -132,14 +161,16 @@
       ElMessage.warning(T('PleaseSelectData'))
       return
     }
+    const normalized = normalizeMaxDevices(maxDevices.value)
+    maxDevices.value = normalized
     const res = await setLimit({
       user_id: listQuery.user_id,
-      max_devices: maxDevices.value,
+      max_devices: normalized,
     }).catch(_ => false)
     if (res) {
       const user = getCurrentUser()
       if (user) {
-        user.max_devices = maxDevices.value
+        user.max_devices = normalized
       }
       ElMessage.success(T('OperationSuccess'))
     }
@@ -167,7 +198,7 @@
   }
 
   const toBatchUnbind = async () => {
-    const ids = multipleSelection.value.map(v => v.id)
+    const ids = multipleSelection.value.filter(v => v.status === 1).map(v => v.id)
     if (!ids.length) {
       ElMessage.warning(T('PleaseSelectData'))
       return
@@ -185,11 +216,6 @@
       ElMessage.success(T('OperationSuccess'))
       getList()
     }
-  }
-
-  const expired = (row) => {
-    const now = new Date().getTime()
-    return row.expired_at * 1000 < now
   }
 
   onMounted(async () => {

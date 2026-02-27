@@ -38,7 +38,7 @@
         <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center"/>
         <el-table-column :label="T('MaxDevices')" align="center" width="120">
           <template #default="{row}">
-            <el-tag>{{ row.max_devices || 1 }}</el-tag>
+            <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column :label="T('Actions')" align="center" width="760">
