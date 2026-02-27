@@ -3,6 +3,8 @@
           class="menus"
           :collapse="isCollapse"
           :default-active="activeIndex"
+          popper-class="rd-menu-popper"
+          :popper-offset="10"
           background-color="transparent"
           text-color="#dbe8ff"
           active-text-color="#ffffff"
@@ -85,10 +87,21 @@
     :deep(.el-menu--collapse .el-sub-menu__title) {
       padding: 0 !important;
       justify-content: center;
+      display: flex;
+      align-items: center;
+      width: 100%;
     }
     :deep(.el-menu--collapse .el-menu-item .el-icon),
     :deep(.el-menu--collapse .el-sub-menu__title .el-icon) {
       margin: 0 !important;
+    }
+    :deep(.el-menu--collapse .el-sub-menu__title .el-tooltip__trigger) {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 !important;
     }
   }
 </style>
