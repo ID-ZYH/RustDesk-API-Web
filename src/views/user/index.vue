@@ -41,15 +41,15 @@
             <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="T('Actions')" align="center" width="560">
+        <el-table-column :label="T('Actions')" align="center" header-align="center" width="720" fixed="right">
           <template #default="{row}">
             <div class="action-row">
-              <el-button size="small" @click="toTag(row)">{{ T('UserTags') }}</el-button>
-              <el-button size="small" @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
-              <el-button size="small" type="primary" @click="toUserDevice(row)">{{ T('DeviceManage') }}</el-button>
-              <el-button size="small" @click="toEdit(row)">{{ T('Edit') }}</el-button>
-              <el-button size="small" type="warning" @click="changePass(row)">{{ T('ResetPassword') }}</el-button>
-              <el-button size="small" type="danger" @click="remove(row)">{{ T('Delete') }}</el-button>
+              <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
+              <el-button @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
+              <el-button type="primary" @click="toUserDevice(row)">{{ T('DeviceManage') }}</el-button>
+              <el-button @click="toEdit(row)">{{ T('Edit') }}</el-button>
+              <el-button type="warning" @click="changePass(row)">{{ T('ResetPassword') }}</el-button>
+              <el-button type="danger" @click="remove(row)">{{ T('Delete') }}</el-button>
             </div>
           </template>
         </el-table-column>
@@ -135,5 +135,14 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+}
+.user-table :deep(.el-table__fixed-right) {
+  z-index: 3;
+}
+.user-table :deep(.el-table__fixed-right .el-table__fixed-body-wrapper) {
+  overflow-y: hidden !important;
+}
+.user-table :deep(.el-table__fixed-right .el-table__cell .cell) {
+  overflow: visible;
 }
 </style>
