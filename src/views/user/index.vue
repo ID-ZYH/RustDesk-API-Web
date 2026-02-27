@@ -12,9 +12,8 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card class="list-body table-wrap" shadow="hover">
-      <div class="table-scroll-x">
-        <el-table class="user-table" :data="listRes.list" v-loading="listRes.loading" border>
+    <el-card class="list-body" shadow="hover">
+      <el-table class="user-table" :data="listRes.list" v-loading="listRes.loading" border>
         <el-table-column prop="id" label="ID" align="center"></el-table-column>
         <el-table-column prop="username" :label="T('Username')" align="center" min-width="160" show-overflow-tooltip/>
         <el-table-column prop="email" :label="T('Email')" align="center" min-width="220" show-overflow-tooltip/>
@@ -55,7 +54,6 @@
           </template>
         </el-table-column>
       </el-table>
-      </div>
     </el-card>
     <el-card class="list-page" shadow="hover">
       <el-pagination background
@@ -124,25 +122,33 @@
 </script>
 
 <style scoped>
-.table-wrap {
-  overflow: hidden;
-}
-.table-scroll-x {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 4px;
-}
-.table-scroll-x :deep(.user-table) {
-  width: max-content;
-  min-width: 1800px;
-}
-.table-scroll-x :deep(.el-table__cell) {
+.user-table :deep(.el-table__cell) {
   white-space: nowrap;
 }
-.table-scroll-x :deep(.el-table .cell) {
+.user-table :deep(.el-table .cell) {
   white-space: nowrap;
   line-height: 20px;
+}
+.user-table :deep(.el-table__body-wrapper) {
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c6cad1 #f3f4f6;
+}
+.user-table :deep(.el-table__body-wrapper::-webkit-scrollbar) {
+  height: 8px;
+  width: 8px;
+}
+.user-table :deep(.el-table__body-wrapper::-webkit-scrollbar-thumb) {
+  background: #c6cad1;
+  border-radius: 8px;
+}
+.user-table :deep(.el-table__body-wrapper::-webkit-scrollbar-track) {
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+.user-table :deep(.el-table__fixed-right) {
+  box-shadow: -6px 0 8px -8px rgba(0, 0, 0, 0.18);
 }
 .action-row {
   display: flex;
