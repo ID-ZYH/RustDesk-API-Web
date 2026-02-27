@@ -10,13 +10,13 @@ import zhTw from 'element-plus/es/locale/lang/zh-tw'
 import { admin, app, server } from '@/api/config'
 
 const langs = {
-  'zh-CN': { name: '中文', value: zhCn, sideBarWidth: '210px' },
-  'en': { name: 'English', value: en, sideBarWidth: '230px' },
-  'fr': { name: 'Français', value: fr, sideBarWidth: '280px' },
-  'ko': { name: '한국어', value: ko, sideBarWidth: '230px' },
-  'ru': { name: 'Русский', value: ru, sideBarWidth: '250px' },
-  'es': { name: 'Español', value: es, sideBarWidth: '280px' },
-  'zh-TW': { name: '中文繁体', value: zhTw, sideBarWidth: '210px' },
+  'zh-CN': { name: 'Chinese (Simplified)', value: zhCn, sideBarWidth: '248px' },
+  'en': { name: 'English', value: en, sideBarWidth: '260px' },
+  'fr': { name: 'French', value: fr, sideBarWidth: '286px' },
+  'ko': { name: 'Korean', value: ko, sideBarWidth: '260px' },
+  'ru': { name: 'Russian', value: ru, sideBarWidth: '278px' },
+  'es': { name: 'Spanish', value: es, sideBarWidth: '286px' },
+  'zh-TW': { name: 'Chinese (Traditional)', value: zhTw, sideBarWidth: '248px' },
 }
 const defaultLang = 'zh-CN'
 export const useAppStore = defineStore({

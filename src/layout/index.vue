@@ -49,7 +49,10 @@
 <style lang="scss" scoped>
 .app-shell {
   min-height: 100vh;
-  background: radial-gradient(circle at 10% 10%, #eef4ff 0%, #f7f9fc 40%, #f2f5fa 100%);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.14) 0%, rgba(59, 130, 246, 0) 42%),
+    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 45%),
+    linear-gradient(180deg, #f4f8ff 0%, #f2f6fd 100%);
 }
 
 .app-header {
@@ -63,7 +66,11 @@
   height: 44px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  margin: 0 16px;
+  padding: 0 10px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 10px;
 }
 
 .app-left {
@@ -82,11 +89,11 @@
 
 .page-panel {
   height: 100%;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 14px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e7edf7;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(4px);
 }
 </style>
-

@@ -26,9 +26,10 @@ a {
 .list-query,
 .list-body,
 .list-page {
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  box-shadow: var(--panel-shadow);
+  border: 1px solid var(--panel-border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--panel-shadow) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   overflow: hidden;
 }
 
@@ -44,7 +45,7 @@ a {
 .list-query .el-card__body,
 .list-body .el-card__body,
 .list-page .el-card__body {
-  padding: 12px;
+  padding: 12px 14px;
 }
 
 .dialog-form {
@@ -76,7 +77,9 @@ a {
 }
 
 .el-table {
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e6edf8;
 }
 
 .el-table th.el-table__cell {
@@ -91,6 +94,10 @@ a {
 
 .el-pagination {
   justify-content: flex-end;
+}
+
+.el-form-item {
+  margin-bottom: 14px !important;
 }
 
 .el-dialog {

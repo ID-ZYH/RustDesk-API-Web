@@ -1,14 +1,18 @@
 <template>
-  <el-tag v-for="(t, i) in tags"
-          :key="t.name"
-          class="tag"
-          :closable="t.closeable"
-          @close="close(t)"
-          @click="toTag(t)"
-          :type="t.active?'primary':'info'"
-          :effect="t.active?'dark':'plain'">
-    {{ T(t.title) }}
-  </el-tag>
+  <el-scrollbar class="tags-scroll">
+    <div class="tags-wrap">
+      <el-tag v-for="(t, i) in tags"
+              :key="t.name"
+              class="tag"
+              :closable="t.closeable"
+              @close="close(t)"
+              @click="toTag(t)"
+              :type="t.active?'primary':'info'"
+              :effect="t.active?'dark':'plain'">
+        {{ T(t.title) }}
+      </el-tag>
+    </div>
+  </el-scrollbar>
 </template>
 
 <script>
@@ -72,7 +76,15 @@
 </script>
 
 <style lang="scss" scoped>
-.tag-wrap {
+.tags-scroll {
+  width: 100%;
+}
+
+.tags-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 2px 0;
 }
 
 .tag {
