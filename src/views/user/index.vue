@@ -13,18 +13,19 @@
       </el-form>
     </el-card>
     <el-card class="list-body table-wrap" shadow="hover">
-      <el-table :data="listRes.list" v-loading="listRes.loading" border style="min-width: 1400px">
+      <div class="table-scroll-x">
+        <el-table class="user-table" :data="listRes.list" v-loading="listRes.loading" border>
         <el-table-column prop="id" label="ID" align="center"></el-table-column>
-        <el-table-column prop="username" :label="T('Username')" align="center"/>
-        <el-table-column prop="email" :label="T('Email')" align="center"/>
-        <el-table-column prop="nickname" :label="T('Nickname')" align="center"/>
-        <el-table-column :label="T('Group')" align="center">
+        <el-table-column prop="username" :label="T('Username')" align="center" min-width="160" show-overflow-tooltip/>
+        <el-table-column prop="email" :label="T('Email')" align="center" min-width="220" show-overflow-tooltip/>
+        <el-table-column prop="nickname" :label="T('Nickname')" align="center" min-width="160" show-overflow-tooltip/>
+        <el-table-column :label="T('Group')" align="center" min-width="140">
           <template #default="{row}">
             <span v-if="row.group_id"> <el-tag>{{ listRes.groups?.find(g => g.id === row.group_id)?.name }} </el-tag> </span>
             <span v-else> - </span>
           </template>
         </el-table-column>
-        <el-table-column :label="T('Status')" align="center">
+        <el-table-column :label="T('Status')" align="center" min-width="120">
           <template #default="{row}">
             <el-switch v-model="row.status"
                        :active-value="ENABLE_STATUS"
@@ -33,25 +34,28 @@
             ></el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="remark" :label="T('Remark')" align="center"/>
-        <el-table-column prop="created_at" :label="T('CreatedAt')" align="center"/>
-        <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center"/>
-        <el-table-column :label="T('MaxDevices')" align="center" width="120">
+        <el-table-column prop="remark" :label="T('Remark')" align="center" min-width="220" show-overflow-tooltip/>
+        <el-table-column prop="created_at" :label="T('CreatedAt')" align="center" min-width="180"/>
+        <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center" min-width="180"/>
+        <el-table-column :label="T('MaxDevices')" align="center" min-width="120">
           <template #default="{row}">
             <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="T('Actions')" align="center" width="760" fixed="right">
+        <el-table-column :label="T('Actions')" align="center" width="820" fixed="right">
           <template #default="{row}">
-            <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
-            <el-button @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
-            <el-button type="primary" @click="toUserDevice(row)">{{ T('DeviceManage') }}</el-button>
-            <el-button @click="toEdit(row)">{{ T('Edit') }}</el-button>
-            <el-button type="warning" @click="changePass(row)">{{ T('ResetPassword') }}</el-button>
-            <el-button type="danger" @click="remove(row)">{{ T('Delete') }}</el-button>
+            <div class="action-row">
+              <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
+              <el-button @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
+              <el-button type="primary" @click="toUserDevice(row)">{{ T('DeviceManage') }}</el-button>
+              <el-button @click="toEdit(row)">{{ T('Edit') }}</el-button>
+              <el-button type="warning" @click="changePass(row)">{{ T('ResetPassword') }}</el-button>
+              <el-button type="danger" @click="remove(row)">{{ T('Delete') }}</el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
+      </div>
     </el-card>
     <el-card class="list-page" shadow="hover">
       <el-pagination background
@@ -121,6 +125,29 @@
 
 <style scoped>
 .table-wrap {
+  overflow: hidden;
+}
+.table-scroll-x {
+  width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+.table-scroll-x :deep(.user-table) {
+  width: max-content;
+  min-width: 1800px;
+}
+.table-scroll-x :deep(.el-table__cell) {
+  white-space: nowrap;
+}
+.table-scroll-x :deep(.el-table .cell) {
+  white-space: nowrap;
+  line-height: 20px;
+}
+.action-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
 }
 </style>
