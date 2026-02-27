@@ -28,9 +28,7 @@ export const useUserStore = defineStore({
     },
 
     saveUserData (userData) {
-      // useAppStore().getAppConfig()
       setToken(userData.token)
-      //
       localStorage.setItem('user_info', JSON.stringify({ name: userData.username }))
       this.$patch({
         ...userData,
@@ -42,16 +40,15 @@ export const useUserStore = defineStore({
 
     async login (form) {
       const res = await login(form).catch(e => e)
-      console.log('login', res)
       if (!res.code) {
         useAppStore().loadConfig()
         const userData = res.data
         this.saveUserData(userData)
         return userData
-      } else {
-        return Promise.reject(res)
       }
+      return Promise.reject(res)
     },
+
     async info () {
       const res = await current().catch(_ => false)
       if (res) {
@@ -66,31 +63,32 @@ export const useUserStore = defineStore({
       }
       return false
     },
+
     async oidc (provider, platform, browser) {
-      // oidc data need to be implement
       const data = {
         deviceInfo: {
-          name: navigator.userAgent, // 使用浏览器的 User-Agent 作为设备名
-          os: platform, // 获取操作系统信息
-          type: 'webadmin', // any vaule
+          name: navigator.userAgent,
+          os: platform,
+          type: 'webadmin',
         },
         id: `${platform}-${browser}`,
-        op: provider, // 传入的 provider
-        uuid: '',//crypto.randomUUID(), // 自动生成 UUID
+        op: provider,
+        uuid: '',
       }
       const res = await oidcAuth(data).catch(_ => false)
       if (res) {
         const { code, url } = res.data
         setCode(code)
-        if (provider == 'webauth') {
+        if (provider === 'webauth') {
           window.open(url)
         } else {
           window.location.href = url
         }
       }
     },
+
     async query (code) {
-      const params = { 'code': code, uuid: '' }
+      const params = { code, uuid: '' }
       const res = await oidcQuery(params).catch(_ => false)
       if (res) {
         removeCode()

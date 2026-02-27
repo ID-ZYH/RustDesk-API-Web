@@ -1,5 +1,4 @@
 import { router } from '@/router'
-import { useRouteStore } from '@/store/router'
 import { useUserStore } from '@/store/user'
 import { getToken } from '@/utils/auth'
 import { pinia } from '@/store'
@@ -11,9 +10,7 @@ import { T } from '@/utils/i18n'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/register']
-const routeStore = useRouteStore(pinia)
 const appStore = useAppStore(pinia)
-appStore.getAdminConfig()
 router.beforeEach(async (to, from, next) => {
 
   document.title = T(to.meta?.title) + ' - ' + appStore.setting.title
