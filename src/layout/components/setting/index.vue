@@ -1,22 +1,5 @@
 <template>
   <div class="setting">
-    <div class="menu-item">
-      <el-switch
-          v-model="isDark"
-          style="--el-switch-on-color:#18222c"
-      >
-        <template #active-action>
-          <el-icon>
-            <Moon/>
-          </el-icon>
-        </template>
-        <template #inactive-action>
-          <el-icon>
-            <Sunny color="#000"/>
-          </el-icon>
-        </template>
-      </el-switch>
-    </div>
     <el-dropdown class="menu-item">
       <div class="title">
         <i class="el-icon el-tooltip__trigger" style="font-size: 24px;">
@@ -59,8 +42,6 @@
   import changePwdDialog from '@/components/changePwdDialog.vue'
   import { ref } from 'vue'
   import { T } from '@/utils/i18n'
-  import { useDark } from '@vueuse/core'
-  import { Sunny, Moon } from '@element-plus/icons'
 
   const userStore = useUserStore()
   const user = userStore
@@ -78,8 +59,6 @@
   const changeLang = (v) => {
     appStore.changeLang(v)
   }
-  const isDark = useDark()
-  // const toggleDark = useToggle(isDark)
 </script>
 
 <style lang="scss" scoped>
@@ -116,7 +95,4 @@
   }
 }
 
-:global(html.dark) .setting .title {
-  color: #d9e6ff;
-}
 </style>

@@ -25,8 +25,4 @@
 .scroll-sidebar {
   height: 100vh;
 }
-
-:global(html.dark) .side-shell {
-  background: #12377f;
-}
 </style>

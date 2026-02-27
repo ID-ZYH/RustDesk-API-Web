@@ -10,18 +10,6 @@
   --table-head-bg: #f2f6ff;
 }
 
-html.dark {
-  --basicBlack: #e5edff;
-  --basicWhite: #0f172a;
-  --primaryColor: #5f8dff;
-  --bg-page: #0f172a;
-  --bg-panel: #111f36;
-  --border-color: #243754;
-  --text-1: #d9e6ff;
-  --text-2: #9bb1d9;
-  --table-head-bg: #142847;
-}
-
 html,
 body,
 #app {
@@ -108,10 +96,6 @@ a {
   background: #f7faff;
 }
 
-html.dark .el-table .el-table__row:hover > td.el-table__cell {
-  background: #162846;
-}
-
 .el-table .el-table__body-wrapper {
   scrollbar-gutter: stable both-edges;
 }
@@ -136,4 +120,33 @@ html.dark .el-table .el-table__row:hover > td.el-table__cell {
 
 .el-scrollbar__bar.is-horizontal {
   height: 8px;
+}
+
+/* Collapsed sidebar popup menu: keep blue/white contrast */
+.el-popper.el-menu__popper {
+  border: none !important;
+}
+
+.el-popper.el-menu__popper .el-menu--popup {
+  background: #1f58d6 !important;
+  border: 1px solid #2f66e0 !important;
+  border-radius: 8px !important;
+  padding: 6px !important;
+  box-shadow: none !important;
+}
+
+.el-popper.el-menu__popper .el-menu--popup .el-menu-item,
+.el-popper.el-menu__popper .el-menu--popup .el-sub-menu__title {
+  color: #ffffff !important;
+  border-radius: 6px;
+  min-width: 180px;
+  height: 38px;
+  line-height: 38px;
+}
+
+.el-popper.el-menu__popper .el-menu--popup .el-menu-item:hover,
+.el-popper.el-menu__popper .el-menu--popup .el-sub-menu__title:hover,
+.el-popper.el-menu__popper .el-menu--popup .el-menu-item.is-active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
 }

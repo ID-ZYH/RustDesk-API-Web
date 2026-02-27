@@ -88,22 +88,4 @@
     }
   }
 
-
-:global(html.dark) .header-wrap {
-  background: #111f36;
-}
-
-:global(html.dark) .header-logo {
-  color: #d9e6ff;
-}
-
-:global(html.dark) .ex-icon {
-  color: #d9e6ff;
-}
-
-:global(html.dark) .ex-icon:hover {
-  background: #1a2f53;
-  color: #8cb0ff;
-}
-
 </style>

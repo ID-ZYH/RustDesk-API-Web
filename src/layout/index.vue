@@ -96,22 +96,4 @@
   box-shadow: none;
 }
 
-:global(html.dark) .app-shell {
-  background: #0f172a;
-}
-
-:global(html.dark) .app-header,
-:global(html.dark) .header-tags {
-  background: #111f36;
-  border-color: #243754;
-}
-
-:global(html.dark) .app-container {
-  background: #0f172a;
-}
-
-:global(html.dark) .page-panel {
-  background: #111f36;
-  border-color: #243754;
-}
 </style>

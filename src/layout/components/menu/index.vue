@@ -91,10 +91,6 @@
       margin: 0 !important;
     }
   }
-
-  :global(html.dark) .menus :deep(.el-menu-item.is-active) {
-    background: rgba(140, 176, 255, 0.3);
-  }
 </style>
 <style>
 </style>
