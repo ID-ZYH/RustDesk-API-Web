@@ -23,7 +23,7 @@ export const useAppStore = defineStore({
   id: 'App',
   state: () => ({
     setting: {
-      title: 'Rustdesk API Admin',
+      title: '大仙会议后端API',
       hello: '',
       sideIsCollapse: false,
       logo,
@@ -69,7 +69,7 @@ export const useAppStore = defineStore({
     getAdminConfig () {
       console.log('getAdminConfig')
       return admin().then(res => {
-        this.replaceAdminTitle(res.data.title)
+        this.replaceAdminTitle('大仙会议后端API')
         this.setting.hello = res.data.hello
       })
     },

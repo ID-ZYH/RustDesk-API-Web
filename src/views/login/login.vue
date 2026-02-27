@@ -2,6 +2,7 @@
   <div class="login-container">
     <div class="login-card">
       <img src="@/assets/logo.png" alt="logo" class="login-logo"/>
+      <div class="login-title">大仙会议后端API</div>
 
       <el-form v-if="!disablePwd" label-position="top" class="login-form">
         <el-form-item :label="T('Username')">
@@ -275,10 +276,18 @@ h1 {
 }
 
 .login-logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 12px;
   display: block;
+}
+
+.login-title {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 18px;
 }
 
 .el-form-item {
