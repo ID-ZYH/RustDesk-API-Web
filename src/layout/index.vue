@@ -39,7 +39,7 @@
   const appStore = useAppStore()
   const tagStore = useTagsStore()
   const sideBarWidth = computed(() => appStore.setting.locale.sideBarWidth)
-  const leftWidth = computed(() => appStore.setting.sideIsCollapse ? '72px' : 'var(--sideBarWidth)')
+  const leftWidth = computed(() => 'var(--sideBarWidth)')
 
   const cachedTags = ref([])
 

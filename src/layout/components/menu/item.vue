@@ -2,7 +2,6 @@
   <el-sub-menu v-if="route.children&&route.children.filter(c=>!c.meta?.hide).length>1&&route.children.some(r => !r.meta?.hide)"
                :key="route.name"
                :index="route.name"
-               popper-class="rd-menu-popper"
   >
     <template #title>
       <el-icon v-if="route.meta?.icon">

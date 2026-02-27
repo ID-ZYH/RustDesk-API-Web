@@ -10,13 +10,13 @@ import zhTw from 'element-plus/es/locale/lang/zh-tw'
 import { admin, app, server } from '@/api/config'
 
 const langs = {
-  'zh-CN': { name: 'Chinese (Simplified)', value: zhCn, sideBarWidth: '248px' },
-  'en': { name: 'English', value: en, sideBarWidth: '260px' },
-  'fr': { name: 'French', value: fr, sideBarWidth: '286px' },
-  'ko': { name: 'Korean', value: ko, sideBarWidth: '260px' },
-  'ru': { name: 'Russian', value: ru, sideBarWidth: '278px' },
-  'es': { name: 'Spanish', value: es, sideBarWidth: '286px' },
-  'zh-TW': { name: 'Chinese (Traditional)', value: zhTw, sideBarWidth: '248px' },
+  'zh-CN': { name: 'Chinese (Simplified)', value: zhCn, sideBarWidth: '218px' },
+  'en': { name: 'English', value: en, sideBarWidth: '232px' },
+  'fr': { name: 'French', value: fr, sideBarWidth: '240px' },
+  'ko': { name: 'Korean', value: ko, sideBarWidth: '228px' },
+  'ru': { name: 'Russian', value: ru, sideBarWidth: '238px' },
+  'es': { name: 'Spanish', value: es, sideBarWidth: '240px' },
+  'zh-TW': { name: 'Chinese (Traditional)', value: zhTw, sideBarWidth: '218px' },
 }
 const defaultLang = 'zh-CN'
 export const useAppStore = defineStore({
@@ -25,7 +25,6 @@ export const useAppStore = defineStore({
     setting: {
       title: '大仙会议后端API',
       hello: '',
-      sideIsCollapse: false,
       logo,
       langs: langs,
       lang: defaultLang,
@@ -43,9 +42,6 @@ export const useAppStore = defineStore({
   }),
 
   actions: {
-    sideCollapse () {
-      this.setting.sideIsCollapse = !this.setting.sideIsCollapse
-    },
     setLang (lang) {
       console.log('setLang', lang)
       this.setting.lang = lang

@@ -121,39 +121,3 @@ a {
 .el-scrollbar__bar.is-horizontal {
   height: 8px;
 }
-
-/* Collapsed sidebar popup menu: force blue/white high-contrast and right offset */
-.rd-menu-popper.el-popper {
-  border: none !important;
-  margin-left: 8px !important;
-}
-
-.rd-menu-popper .el-menu {
-  background: #1f58d6 !important;
-  border: 1px solid #2f66e0 !important;
-  border-radius: 8px !important;
-  padding: 6px !important;
-  box-shadow: 0 8px 22px rgba(20, 64, 160, 0.22) !important;
-  min-width: 188px;
-}
-
-.rd-menu-popper .el-menu-item,
-.rd-menu-popper .el-sub-menu__title {
-  color: #ffffff !important;
-  border-radius: 6px;
-  height: 38px;
-  line-height: 38px;
-  font-weight: 500;
-}
-
-.rd-menu-popper .el-menu-item .el-icon,
-.rd-menu-popper .el-sub-menu__title .el-icon {
-  color: #ffffff !important;
-}
-
-.rd-menu-popper .el-menu-item:hover,
-.rd-menu-popper .el-sub-menu__title:hover,
-.rd-menu-popper .el-menu-item.is-active {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #ffffff !important;
-}
