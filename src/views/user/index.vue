@@ -41,7 +41,7 @@
         <el-table-column prop="remark" :label="T('Remark')" align="center" width="220" show-overflow-tooltip />
         <el-table-column prop="created_at" :label="T('CreatedAt')" align="center" width="180" />
         <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center" width="180" />
-        <el-table-column :label="T('Actions')" align="center" header-align="center" width="720" fixed="right">
+        <el-table-column :label="T('Actions')" align="center" header-align="center" width="680" fixed="right">
           <template #default="{row}">
             <div class="action-row">
               <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
@@ -122,6 +122,9 @@
 </script>
 
 <style scoped>
+.list-body :deep(.el-card__body) {
+  padding: 10px 12px;
+}
 .user-table :deep(.el-table__cell) {
   white-space: nowrap;
 }
@@ -141,9 +144,14 @@
 }
 .user-table :deep(.el-table__fixed-right .el-table__fixed-body-wrapper) {
   overflow-y: hidden !important;
+  scrollbar-width: none;
 }
 .user-table :deep(.el-table__fixed-right .el-table__cell .cell) {
   overflow: visible;
+}
+.user-table :deep(.el-table__fixed-right .el-table__fixed-body-wrapper::-webkit-scrollbar) {
+  width: 0;
+  height: 0;
 }
 .user-table :deep(.el-table__body-wrapper) {
   overflow-x: auto;
