@@ -83,25 +83,38 @@
       color: #f2f6ff;
       opacity: 1;
     }
-    :deep(.el-menu--collapse .el-menu-item),
-    :deep(.el-menu--collapse .el-sub-menu__title) {
-      padding: 0 !important;
-      justify-content: center;
-      display: flex;
-      align-items: center;
+    :deep(.el-menu--collapse) {
       width: 100%;
     }
-    :deep(.el-menu--collapse .el-menu-item .el-icon),
-    :deep(.el-menu--collapse .el-sub-menu__title .el-icon) {
+    :deep(.el-menu--collapse > .el-menu-item),
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title) {
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
+      margin: 0 auto 8px;
+      padding: 0 !important;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    :deep(.el-menu--collapse > .el-menu-item .el-icon),
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title .el-icon) {
       margin: 0 !important;
     }
-    :deep(.el-menu--collapse .el-sub-menu__title .el-tooltip__trigger) {
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title .el-tooltip__trigger) {
       width: 100%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0 !important;
+      border-radius: inherit;
+      background: transparent;
+    }
+    :deep(.el-menu--collapse > .el-menu-item:hover),
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title:hover) {
+      background: rgba(255, 255, 255, 0.18);
     }
   }
 </style>
