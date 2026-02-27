@@ -4,7 +4,7 @@
           :collapse="isCollapse"
           :default-active="activeIndex"
           background-color="transparent"
-          text-color="#d9e3f0"
+          text-color="#dbe8ff"
           active-text-color="#ffffff"
           router
   >
@@ -44,32 +44,36 @@
 
 <style lang="scss" scoped>
   .menus {
-    min-height: calc(100vh - 20px);
+    min-height: calc(100vh - 56px);
     border-right: none;
-    padding: 10px 8px 12px;
+    padding: 8px 6px 12px;
     &:not(.el-menu--collapse) {
       width: var(--sideBarWidth);
     }
     :deep(.el-sub-menu__title),
     :deep(.el-menu-item) {
-      height: 42px;
-      line-height: 42px;
-      border-radius: 9px;
-      margin-bottom: 6px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 6px;
+      margin-bottom: 4px;
       transition: all 0.2s ease;
     }
     :deep(.el-menu-item:hover),
     :deep(.el-sub-menu__title:hover) {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.16);
       color: #ffffff;
     }
     :deep(.el-menu-item.is-active) {
-      background: linear-gradient(90deg, #3d7eff 0%, #598dff 100%);
-      box-shadow: 0 6px 18px rgba(61, 126, 255, 0.45);
+      background: rgba(255, 255, 255, 0.24);
+      box-shadow: none;
     }
     :deep(.el-sub-menu .el-menu) {
       background: transparent;
     }
+  }
+
+  :global(html.dark) .menus :deep(.el-menu-item.is-active) {
+    background: rgba(140, 176, 255, 0.3);
   }
 </style>
 <style>

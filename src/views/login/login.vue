@@ -175,20 +175,19 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: radial-gradient(circle at 20% 20%, #e8efff 0%, #dfe9ff 30%, #edf3ff 60%, #f4f7ff 100%);
+  background: #eef4ff;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .login-card {
-  width: 390px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 18px 48px rgba(37, 57, 95, 0.16);
+  width: 380px;
+  background: #ffffff;
+  border: 1px solid #dfe8fb;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: none;
   text-align: center;
-  backdrop-filter: blur(5px);
 }
 
 h1 {
@@ -218,10 +217,10 @@ h1 {
 
 .login-button {
   width: 100%;
-  height: 42px;
-  margin-bottom: 12px;
+  height: 40px;
+  margin-bottom: 10px;
   margin-left: 0;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 .divider {
@@ -260,13 +259,13 @@ h1 {
   justify-content: center;
   gap: 10px;
   width: 100%;
-  height: 46px;
+  height: 42px;
   background-color: #ffffff;
-  border: 1px solid #dce5f3;
-  border-radius: 10px;
+  border: 1px solid #dfe8fb;
+  border-radius: 6px;
   color: #0f172a;
   font-size: 14px;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+  box-shadow: none;
 }
 
 .oidc-icon {
@@ -283,11 +282,11 @@ h1 {
 }
 
 .login-title {
-  font-size: 22px;
-  line-height: 30px;
+  font-size: 20px;
+  line-height: 28px;
   font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 18px;
+  color: #1f58d6;
+  margin-bottom: 14px;
 }
 
 .el-form-item {

@@ -83,22 +83,22 @@
 .tags-wrap {
   display: flex;
   align-items: center;
-  min-height: 34px;
-  padding: 2px 0;
+  min-height: 30px;
+  padding: 0;
 }
 
 .tag {
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-right: 8px;
-  border: 1px solid #dbe5f3;
-  background: rgba(255, 255, 255, 0.92);
-  color: #334155;
+  margin-right: 6px;
+  border: 1px solid #d8e4fb;
+  background: #ffffff;
+  color: #3b4c65;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #9db8ff;
-    color: #1e3a8a;
+    border-color: #8db0fb;
+    color: #1f58d6;
   }
 
   :deep(.el-tag__close) {
@@ -106,8 +106,8 @@
   }
 
   &[effect='dark'] {
-    background: linear-gradient(90deg, #3d7eff 0%, #5b8eff 100%);
-    border-color: #3d7eff;
+    background: #1f58d6;
+    border-color: #1f58d6;
     color: #fff;
   }
 }

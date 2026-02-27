@@ -27,27 +27,27 @@
 
 <style scoped lang="scss">
 .side-shell {
-  height: calc(100vh - 20px);
-  border-radius: 14px;
-  background: linear-gradient(180deg, #162033 0%, #1d2b45 100%);
-  box-shadow: 0 10px 26px rgba(22, 32, 51, 0.35);
+  height: 100vh;
+  border-radius: 0;
+  background: #1f58d6;
   overflow: hidden;
 }
 .side-brand {
-  height: 58px;
+  height: 56px;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .brand-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #fff;
 }
 .brand-text {
-  color: #f8fbff;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
@@ -55,6 +55,10 @@
   text-overflow: ellipsis;
 }
 .scroll-sidebar {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 56px);
+}
+
+:global(html.dark) .side-shell {
+  background: #12377f;
 }
 </style>

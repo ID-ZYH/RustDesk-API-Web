@@ -87,7 +87,7 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 
   .menu-item {
     margin-left: 0;
@@ -114,5 +114,9 @@
       white-space: nowrap;
     }
   }
+}
+
+:global(html.dark) .setting .title {
+  color: #d9e6ff;
 }
 </style>

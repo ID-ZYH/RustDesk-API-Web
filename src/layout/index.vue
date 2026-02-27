@@ -49,51 +49,69 @@
 <style lang="scss" scoped>
 .app-shell {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.14) 0%, rgba(59, 130, 246, 0) 42%),
-    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 45%),
-    linear-gradient(180deg, #f4f8ff 0%, #f2f6fd 100%);
+  background: #f3f7ff;
 }
 
 .app-header {
-  background: transparent;
+  background: #ffffff;
   display: flex;
-  height: 62px;
-  padding: 8px 16px 0;
+  height: 56px;
+  padding: 0 12px;
+  border-bottom: 1px solid #e3ebfb;
 }
 
 .header-tags {
-  height: 44px;
+  height: 40px;
   display: flex;
   align-items: center;
-  margin: 0 16px;
-  padding: 0 10px;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  background: rgba(255, 255, 255, 0.86);
-  border-radius: 10px;
+  margin: 0;
+  padding: 0 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #e3ebfb;
 }
 
 .app-left {
-  transition: width 0.24s ease;
-  padding: 10px 0 10px 10px;
+  transition: width 0.2s ease;
+  background: #1f58d6;
+  border-right: 1px solid #2f66e0;
+  overflow: hidden;
 }
 
 .app-container {
   min-height: 100vh;
   overflow: hidden;
+  background: #f6f9ff;
 }
 
 .app-main {
-  padding: 0 16px 16px;
+  padding: 10px;
 }
 
 .page-panel {
   height: 100%;
-  border-radius: 16px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #e7edf7;
-  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e3ebfb;
+  box-shadow: none;
+}
+
+:global(html.dark) .app-shell {
+  background: #0f172a;
+}
+
+:global(html.dark) .app-header,
+:global(html.dark) .header-tags {
+  background: #111f36;
+  border-color: #243754;
+}
+
+:global(html.dark) .app-container {
+  background: #0f172a;
+}
+
+:global(html.dark) .page-panel {
+  background: #111f36;
+  border-color: #243754;
 }
 </style>

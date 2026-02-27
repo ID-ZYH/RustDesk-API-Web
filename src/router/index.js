@@ -202,12 +202,6 @@ export const asyncRoutes = [
         meta: { title: 'ShareRecord', icon: 'Share' /*keepAlive: true*/ },
         component: () => import('@/views/share_record/index.vue'),
       },
-      {
-        path: '/serverCmd',
-        name: 'ServerCmd',
-        meta: { title: 'ServerCmd', icon: 'Tools' /*keepAlive: true*/ },
-        component: () => import('@/views/rustdesk/control.vue'),
-      },
     ],
   },
 ]

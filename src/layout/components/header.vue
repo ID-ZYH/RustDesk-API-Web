@@ -43,17 +43,15 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0 14px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.88);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-    border: 1px solid rgba(226, 232, 240, 0.85);
+    padding: 0;
+    border-radius: 0;
+    background: #ffffff;
   }
 
   .ex-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,8 +62,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: #edf2ff;
-      color: #1d4ed8;
+      background: #e9f0ff;
+      color: #1f58d6;
     }
   }
 
@@ -78,7 +76,7 @@
     .title {
       display: block;
       margin-left: 10px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
     }
 
@@ -86,9 +84,26 @@
       display: block;
       width: 28px;
       height: 28px;
-      border-radius: 8px;
+      border-radius: 6px;
     }
   }
 
+
+:global(html.dark) .header-wrap {
+  background: #111f36;
+}
+
+:global(html.dark) .header-logo {
+  color: #d9e6ff;
+}
+
+:global(html.dark) .ex-icon {
+  color: #d9e6ff;
+}
+
+:global(html.dark) .ex-icon:hover {
+  background: #1a2f53;
+  color: #8cb0ff;
+}
 
 </style>
