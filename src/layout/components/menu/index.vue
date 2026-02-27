@@ -88,19 +88,36 @@
     }
     :deep(.el-menu--collapse > .el-menu-item),
     :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title) {
-      width: 44px;
-      height: 44px;
-      line-height: 44px;
-      margin: 0 auto 8px;
+      position: relative;
+      width: 100%;
+      height: 46px;
+      line-height: 46px;
+      margin: 0 0 8px;
       padding: 0 !important;
-      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
+      border-radius: 0;
+      background: transparent !important;
+    }
+    :deep(.el-menu--collapse > .el-menu-item::before),
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title::before) {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      transform: translate(-50%, -50%);
+      background: transparent;
+      transition: background 0.2s ease;
     }
     :deep(.el-menu--collapse > .el-menu-item .el-icon),
     :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title .el-icon) {
       margin: 0 !important;
+      position: relative;
+      z-index: 1;
     }
     :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title .el-tooltip__trigger) {
       width: 100%;
@@ -112,9 +129,11 @@
       border-radius: inherit;
       background: transparent;
     }
-    :deep(.el-menu--collapse > .el-menu-item:hover),
-    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title:hover) {
-      background: rgba(255, 255, 255, 0.18);
+    :deep(.el-menu--collapse > .el-menu-item:hover::before),
+    :deep(.el-menu--collapse > .el-sub-menu > .el-sub-menu__title:hover::before),
+    :deep(.el-menu--collapse > .el-menu-item.is-active::before),
+    :deep(.el-menu--collapse > .el-sub-menu.is-active > .el-sub-menu__title::before) {
+      background: rgba(255, 255, 255, 0.2);
     }
   }
 </style>
