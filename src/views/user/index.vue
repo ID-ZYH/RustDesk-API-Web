@@ -33,14 +33,14 @@
             ></el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="remark" :label="T('Remark')" align="center" width="220" show-overflow-tooltip />
-        <el-table-column prop="created_at" :label="T('CreatedAt')" align="center" width="180" />
-        <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center" width="180" />
         <el-table-column :label="T('MaxDevices')" align="center" width="120">
           <template #default="{row}">
             <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="remark" :label="T('Remark')" align="center" width="220" show-overflow-tooltip />
+        <el-table-column prop="created_at" :label="T('CreatedAt')" align="center" width="180" />
+        <el-table-column prop="updated_at" :label="T('UpdatedAt')" align="center" width="180" />
         <el-table-column :label="T('Actions')" align="center" header-align="center" width="720" fixed="right">
           <template #default="{row}">
             <div class="action-row">
@@ -144,5 +144,9 @@
 }
 .user-table :deep(.el-table__fixed-right .el-table__cell .cell) {
   overflow: visible;
+}
+.user-table :deep(.el-table__body-wrapper) {
+  overflow-x: auto;
+  overflow-y: auto;
 }
 </style>
