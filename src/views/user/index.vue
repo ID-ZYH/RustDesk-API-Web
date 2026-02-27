@@ -12,8 +12,8 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card class="list-body" shadow="hover">
-      <el-table :data="listRes.list" v-loading="listRes.loading" border>
+    <el-card class="list-body table-wrap" shadow="hover">
+      <el-table :data="listRes.list" v-loading="listRes.loading" border style="min-width: 1400px">
         <el-table-column prop="id" label="ID" align="center"></el-table-column>
         <el-table-column prop="username" :label="T('Username')" align="center"/>
         <el-table-column prop="email" :label="T('Email')" align="center"/>
@@ -41,7 +41,7 @@
             <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="T('Actions')" align="center" width="760">
+        <el-table-column :label="T('Actions')" align="center" width="760" fixed="right">
           <template #default="{row}">
             <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
             <el-button @click="toAddressBook(row)">{{ T('UserAddressBook') }}</el-button>
@@ -120,4 +120,7 @@
 </script>
 
 <style scoped>
+.table-wrap {
+  overflow-x: auto;
+}
 </style>
