@@ -41,7 +41,7 @@
             <el-tag>{{ row.max_devices === -1 ? T('Unlimited') : (row.max_devices || 1) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column :label="T('Actions')" align="center" width="820" fixed="right">
+        <el-table-column :label="T('Actions')" align="right" header-align="center" width="760" fixed="right">
           <template #default="{row}">
             <div class="action-row">
               <el-button @click="toTag(row)">{{ T('UserTags') }}</el-button>
@@ -150,10 +150,18 @@
 .user-table :deep(.el-table__fixed-right) {
   box-shadow: -6px 0 8px -8px rgba(0, 0, 0, 0.18);
 }
+.user-table :deep(.el-table__fixed-right .el-table__fixed-body-wrapper) {
+  overflow-y: hidden !important;
+}
+.user-table :deep(.el-table__fixed-right .el-table__cell .cell) {
+  overflow: visible;
+}
 .action-row {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
   gap: 8px;
 }
 </style>
