@@ -30,3 +30,27 @@ export function batchUnbind (data) {
     data,
   })
 }
+
+export function del (data) {
+  return request({
+    url: '/user_device/delete',
+    method: 'post',
+    data,
+  })
+}
+
+export function batchDelete (data) {
+  return request({
+    url: '/user_device/batchDelete',
+    method: 'post',
+    data,
+  })
+}
+
+export function clearUnbound (data) {
+  return request({
+    url: '/user_device/clearUnbound',
+    method: 'post',
+    data,
+  })
+}

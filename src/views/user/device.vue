@@ -19,10 +19,12 @@
           <el-input-number v-model="maxDevices" :min="-1" :max="10000" />
           <span style="margin-left: 8px; color: #999;">{{ T('MaxDevicesTips') }}</span>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="action-buttons">
           <el-button type="primary" @click="saveLimit">{{ T('Save') }}</el-button>
           <el-button type="primary" @click="handlerQuery">{{ T('Filter') }}</el-button>
-          <el-button type="danger" @click="toBatchUnbind">{{ T('BatchDelete') }}</el-button>
+          <el-button type="warning" @click="toBatchUnbind">批量解绑</el-button>
+          <el-button type="danger" @click="toBatchDelete">{{ T('BatchDelete') }}</el-button>
+          <el-button @click="toClearUnbound">清除已解绑</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -30,9 +32,8 @@
     <el-card class="list-body" shadow="hover">
       <el-table :data="listRes.list" v-loading="listRes.loading" border @selection-change="handleSelectionChange">
         <el-table-column type="selection" align="center" width="50" />
-        <el-table-column prop="id" label="ID" align="center" width="90" />
         <el-table-column prop="username" :label="T('Username')" align="center" width="140" />
-        <el-table-column prop="device_id" :label="T('Device')" align="center" show-overflow-tooltip />
+        <el-table-column prop="device_id" label="被控ID" align="center" show-overflow-tooltip />
         <el-table-column prop="uuid" :label="T('Uuid')" align="center" show-overflow-tooltip />
         <el-table-column prop="platform" :label="T('Platform')" align="center" width="120" />
         <el-table-column prop="ip" :label="T('Ip')" align="center" width="150" />
@@ -51,9 +52,10 @@
             {{ row.last_login_at || '-' }}
           </template>
         </el-table-column>
-        <el-table-column :label="T('Actions')" align="center" width="180">
+        <el-table-column :label="T('Actions')" align="center" width="220" fixed="right">
           <template #default="{row}">
-            <el-button type="danger" :disabled="row.status !== 1" @click="toUnbind(row)">{{ T('UnBind') }}</el-button>
+            <el-button type="warning" :disabled="row.status !== 1" @click="toUnbind(row)">{{ T('UnBind') }}</el-button>
+            <el-button type="danger" @click="toDelete(row)">{{ T('Delete') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -76,7 +78,7 @@
   import { computed, reactive, ref, watch, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import { loadAllUsers } from '@/global'
-  import { list, setLimit, unbind, batchUnbind } from '@/api/user_device'
+  import { list, setLimit, unbind, batchUnbind, del, batchDelete, clearUnbound } from '@/api/user_device'
   import { ElMessage, ElMessageBox } from 'element-plus'
   import { T } from '@/utils/i18n'
 
@@ -203,7 +205,7 @@
       ElMessage.warning(T('PleaseSelectData'))
       return
     }
-    const cf = await ElMessageBox.confirm(T('Confirm?', { param: T('BatchDelete') }), {
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: '批量解绑' }), {
       confirmButtonText: T('Confirm'),
       cancelButtonText: T('Cancel'),
       type: 'warning',
@@ -212,6 +214,60 @@
       return
     }
     const res = await batchUnbind({ ids }).catch(_ => false)
+    if (res) {
+      ElMessage.success(T('OperationSuccess'))
+      getList()
+    }
+  }
+
+  const toDelete = async (row) => {
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: T('Delete') }), {
+      confirmButtonText: T('Confirm'),
+      cancelButtonText: T('Cancel'),
+      type: 'warning',
+    }).catch(_ => false)
+    if (!cf) {
+      return
+    }
+    const res = await del({ id: row.id }).catch(_ => false)
+    if (res) {
+      ElMessage.success(T('OperationSuccess'))
+      getList()
+    }
+  }
+
+  const toBatchDelete = async () => {
+    const ids = multipleSelection.value.map(v => v.id)
+    if (!ids.length) {
+      ElMessage.warning(T('PleaseSelectData'))
+      return
+    }
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: T('BatchDelete') }), {
+      confirmButtonText: T('Confirm'),
+      cancelButtonText: T('Cancel'),
+      type: 'warning',
+    }).catch(_ => false)
+    if (!cf) {
+      return
+    }
+    const res = await batchDelete({ ids }).catch(_ => false)
+    if (res) {
+      ElMessage.success(T('OperationSuccess'))
+      getList()
+    }
+  }
+
+  const toClearUnbound = async () => {
+    const cf = await ElMessageBox.confirm(T('Confirm?', { param: '清除已解绑' }), {
+      confirmButtonText: T('Confirm'),
+      cancelButtonText: T('Cancel'),
+      type: 'warning',
+    }).catch(_ => false)
+    if (!cf) {
+      return
+    }
+    const payload = listQuery.user_id ? { user_id: listQuery.user_id } : {}
+    const res = await clearUnbound(payload).catch(_ => false)
     if (res) {
       ElMessage.success(T('OperationSuccess'))
       getList()
@@ -231,5 +287,14 @@
 <style scoped lang="scss">
 .list-query .el-select {
   --el-select-width: 180px;
+}
+.action-buttons {
+  margin-left: 4px;
+}
+.action-buttons :deep(.el-button) {
+  margin-right: 8px;
+}
+.list-body :deep(.el-table) {
+  width: 100%;
 }
 </style>
