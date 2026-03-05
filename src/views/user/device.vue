@@ -33,7 +33,7 @@
       <el-table :data="listRes.list" v-loading="listRes.loading" border @selection-change="handleSelectionChange">
         <el-table-column type="selection" align="center" width="50" />
         <el-table-column prop="username" :label="T('Username')" align="center" width="140" />
-        <el-table-column prop="device_id" label="被控ID" align="center" show-overflow-tooltip />
+        <el-table-column prop="hostname" label="主机名" align="center" show-overflow-tooltip />
         <el-table-column prop="uuid" :label="T('Uuid')" align="center" show-overflow-tooltip />
         <el-table-column prop="platform" :label="T('Platform')" align="center" width="120" />
         <el-table-column prop="ip" :label="T('Ip')" align="center" width="150" />
